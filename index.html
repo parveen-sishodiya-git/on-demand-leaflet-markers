@@ -59,8 +59,13 @@
 </head>
 
 <body ng-controller="wnwdController">
-
-    <h4>No. of markers on view : {{noofmarkers}}</h4>
+    
+    <div class="leaflet-top leaflet-left" style="margin-left: 42px;">
+        <div class="leaflet-control-zoom leaflet-bar leaflet-control">
+            <h6 style="padding: 6px;background: chartreuse;">No. of markers loaded on map : </h6>
+            <h4 style="padding: 6px;background: chartreuse;">{{noofmarkers}}</h4>
+        </div>
+    </div>
     <div class="relative" id="map"></div>
 
         <!-- Optional JavaScript; choose one of the two! -->
