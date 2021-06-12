@@ -46,7 +46,7 @@ app.controller("wnwdController", function ($scope) {
     let markers = [];
     let marker;
 
-    for (i = 0; i < 60000; i++) {
+    for (i = 0; i < 10000; i++) {
         let latlongs = [];
         marker = {};
         latlongs.push(getRandomInRange(-180, 180, 3))
