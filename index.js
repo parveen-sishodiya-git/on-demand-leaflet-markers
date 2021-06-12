@@ -8,10 +8,9 @@ app.controller("wnwdController", function ($scope) {
 
 
     $scope.title = "Windward"
-    var map = L.map('map',
-        {
-            preferCanvas: true
-        }).setView([22.805, 82.0], 5);
+    var map = L.map('map').setView([22.805, 82.0], 5);
+
+    var myRenderer = L.canvas({ padding: 0.5 });
 
     //var myRenderer = L.canvas({ padding: 0.5 });
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -47,36 +46,37 @@ app.controller("wnwdController", function ($scope) {
     let markers = [];
     let marker;
 
-    for (i = 0; i < 5000; i++) {
+    for (i = 0; i < 60000; i++) {
         let latlongs = [];
         marker = {};
         latlongs.push(getRandomInRange(-180, 180, 3))
         latlongs.push(getRandomInRange(-180, 180, 3))
         marker['latlong'] = latlongs;
         marker['iconUrl'] = getIconUrl();
+        marker['color'] = getIconColor();
         markers.push(marker);
     }
 
     let greenIcon = L.icon({
-        iconUrl: "./assets/img/icon/tgreen.png",
+        iconUrl: "./assets/img/icon/1tgreen.png",
         iconSize: [25, 25],
         className: 'mystyle'
     });
 
     let redIcon = L.icon({
-        iconUrl: "./assets/img/icon/tred.png",
+        iconUrl: "./assets/img/icon/1tred.png",
         iconSize: [25, 25],
         className: 'mystyle'
     });
 
     let purpleIcon = L.icon({
-        iconUrl: "./assets/img/icon/tpurple.png",
+        iconUrl: "./assets/img/icon/1tpurple.png",
         iconSize: [25, 25],
         className: 'mystyle'
     });
 
     let brownIcon = L.icon({
-        iconUrl: "./assets/img/icon/tbrown.png",
+        iconUrl: "./assets/img/icon/1tbrown.png",
         iconSize: [25, 25],
         className: 'mystyle'
     });
@@ -99,16 +99,31 @@ app.controller("wnwdController", function ($scope) {
     function getIconUrl() {
         let icon = Math.random() * 10;
         if (icon <= 1) {
-            return "./assets/img/icon/tgreen.png";
+            return "./assets/img/icon/1tgreen.png";
         }
         if (icon <= 2) {
-            return "./assets/img/icon/tbrown.png";
+            return "./assets/img/icon/1tbrown.png";
         }
 
         if (icon <= 3) {
-            return "./assets/img/icon/tpurple.png";
+            return "./assets/img/icon/1tpurple.png";
         }
-        return "./assets/img/icon/tred.png";
+        return "./assets/img/icon/1tred.png";
+    }
+
+    function getIconColor() {
+        let icon = Math.random() * 10;
+        if (icon <= 1) {
+            return "green";
+        }
+        if (icon <= 2) {
+            return "brown";
+        }
+
+        if (icon <= 3) {
+            return "purple";
+        }
+        return "red";
     }
 
     // setInterval(() => {
@@ -129,13 +144,14 @@ app.controller("wnwdController", function ($scope) {
             if (latlongs[0] < toplatinner && latlongs[0] > bottomlatinner && latlongs[1] > leftlonginner && latlongs[1] < rightlonginner) {
                 console.log("icons passed");
                 nom++;
-                L.marker(latlongs, {
+                L.circleMarker(latlongs, {
                     icon: L.icon({
                         iconUrl: markers[marker].iconUrl,
                         iconSize: [17, 17],
                         className: 'mystyle'
                     }),
-                    className: 'mystyle'
+                    color:markers[marker].color,
+                    renderer:myRenderer
                 }).addTo(layer);
             }
         }
@@ -161,5 +177,5 @@ app.controller("wnwdController", function ($scope) {
 
     map.on('load', plotIconsOnLoad())
 
-    map.on('move', plotIconsOnLoad)
+    // map.on('move', plotIconsOnLoad)
 })
