@@ -2,11 +2,11 @@
     from { opacity: 0.5; } 
   }
   
-  .mystyle1 {
+.blinker {
+  animation: fade 1s infinite alternate;
     /* animation: zoominoutsinglefeatured 1s ease; */
-    animation: push 0.3s linear 1;
-    /* animation: fade 1s infinite alternate; */
-  }
+    /* animation: push 0.3s linear 1; */
+}
   @keyframes push{
     50%  {transform: scale(0.8);}
   }
