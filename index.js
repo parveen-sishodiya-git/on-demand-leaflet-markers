@@ -3,7 +3,7 @@ app.controller("wnwdController", function ($scope) {
 
 
     $scope.title = "Windward"
-    
+
     var map = L.map('map').setView([22.805, 82.0], 5);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -17,7 +17,7 @@ app.controller("wnwdController", function ($scope) {
 
     var markerLayer = L.canvasIconLayer({}).addTo(map);
 
-    
+
     let greenIcon = L.icon({
         iconUrl: "./assets/img/icon/1tgreen.png",
         iconSize: [20, 20],
@@ -39,7 +39,7 @@ app.controller("wnwdController", function ($scope) {
 
     let brownIcon = L.icon({
         iconUrl: "./assets/img/icon/1tbrown.png",
-        iconSize: [20,20],
+        iconSize: [20, 20],
         iconAnchor: [10, 9]
     });
 
@@ -47,7 +47,7 @@ app.controller("wnwdController", function ($scope) {
         iconUrl: 'assets/img/icon/1tbrown.png',
         iconSize: [20, 20],
         iconAnchor: [10, 9]
-      });
+    });
 
 
 
@@ -57,19 +57,19 @@ app.controller("wnwdController", function ($scope) {
         let latlongs = [];
         latlongs.push(getRandomInRange(-180, 180, 3))
         latlongs.push(getRandomInRange(-180, 180, 3))
-        let marker =  L.marker(latlongs,{
-            icon:getIcon()
-        }).bindPopup("I Am "+i);
-        markers.push(marker);   
+        let marker = L.marker(latlongs, {
+            icon: getIcon()
+        }).bindPopup("I Am " + i);
+        markers.push(marker);
     }
 
     markerLayer.addLayers(markers);
 
-    $scope.showMarkerLayer= ()=>{
+    $scope.showMarkerLayer = () => {
         map.addLayer(markerLayer);
     }
 
-    $scope.hideMarkerLayer= ()=>{
+    $scope.hideMarkerLayer = () => {
         map.removeLayer(markerLayer);
     }
 
@@ -118,7 +118,7 @@ app.controller("wnwdController", function ($scope) {
         return "red";
     }
 
-   
+
     function getRandomInRange(from, to, fixed) {
         return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
         // .toFixed() returns string, so ' * 1' is a trick to convert to number
